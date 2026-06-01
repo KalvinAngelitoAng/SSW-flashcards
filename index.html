@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu Flashcard SSW Perhotelan</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #f0f4f8;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      h1 {
+        color: #2c3e50;
+        margin-bottom: 10px;
+        text-align: center;
+        font-size: 26px;
+      }
+
+      p {
+        color: #7f8c8d;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+
+      .menu-container {
+        width: 100%;
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .menu-card {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 12px;
+        border: 2px solid #e2e8f0;
+        text-decoration: none;
+        color: #2c3e50;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        transition: all 0.2s ease;
+      }
+
+      .menu-card:hover {
+        border-color: #3498db;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(52, 152, 219, 0.15);
+      }
+
+      .menu-info h2 {
+        font-size: 18px;
+        margin-bottom: 4px;
+      }
+
+      .menu-info span {
+        font-size: 14px;
+        color: #95a5a6;
+      }
+
+      .arrow {
+        font-size: 20px;
+        color: #3498db;
+      }
+
+      /* Gaya untuk bab yang belum tersedia */
+      .disabled {
+        background-color: #e2e8f0;
+        cursor: not-allowed;
+        pointer-events: none;
+        opacity: 0.6;
+      }
+      .disabled .arrow {
+        color: #95a5a6;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🗂️ Modul SSW Perhotelan</h1>
+    <p>Pilih bab di bawah ini untuk mulai menghafal</p>
+
+    <div class="menu-container">
+      <!-- Tombol Menuju Bab 1 -->
+      <a href="Bab1/bab1.html" class="menu-card">
+        <div class="menu-info">
+          <h2>🚪 Bab 1: Kosakata Dasar</h2>
+          <span>52 Kosakata • Siap Belajar</span>
+        </div>
+        <div class="arrow">▶</div>
+      </a>
+
+      <!-- Tombol Menuju Bab 2 (Disiapkan untuk nanti) -->
+      <a href="#" class="menu-card disabled">
+        <div class="menu-info">
+          <h2>🛏️ Bab 2: Pelayanan Kamar</h2>
+          <span>Segera Datang</span>
+        </div>
+        <div class="arrow">🔒</div>
+      </a>
+    </div>
+  </body>
+</html>

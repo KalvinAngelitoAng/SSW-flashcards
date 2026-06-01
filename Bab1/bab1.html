@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flashcard Kosakata Perhotelan Bab 1</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #f0f4f8;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      h1 {
+        color: #2c3e50;
+        margin-bottom: 10px;
+        font-size: 24px;
+        text-align: center;
+      }
+
+      .progress {
+        color: #7f8c8d;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+
+      /* Container Flashcard */
+      .card-container {
+        width: 350px;
+        height: 250px;
+        perspective: 1000px;
+        cursor: pointer;
+        margin-bottom: 30px;
+      }
+
+      .card {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.6s;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+      }
+
+      .card.flipped {
+        transform: rotateY(180deg);
+      }
+
+      .card-face {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+      }
+
+      /* Bagian Depan (Jepang) */
+      .card-front {
+        background-color: #ffffff;
+        color: #333;
+        border: 2px solid #3498db;
+      }
+
+      .japanese-text {
+        font-size: 28px;
+        font-weight: bold;
+        color: #2c3e50;
+      }
+
+      .hint-front {
+        font-size: 12px;
+        color: #95a5a6;
+        margin-top: 15px;
+      }
+      .hint-back {
+        font-size: 12px;
+        color: #ffffff;
+        margin-top: 15px;
+      }
+
+      /* Bagian Belakang (Indonesia) */
+      .card-back {
+        background-color: #3498db;
+        color: white;
+        transform: rotateY(180deg);
+      }
+
+      .indonesian-text {
+        font-size: 24px;
+        font-weight: 500;
+      }
+
+      /* Tombol Kontrol */
+      .controls {
+        display: flex;
+        gap: 15px;
+        width: 100%;
+        max-width: 350px;
+      }
+
+      button {
+        flex: 1;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .btn-nav {
+        background-color: #ffffff;
+        color: #2c3e50;
+        border: 1px solid #bdc3c7;
+      }
+
+      .btn-nav:hover {
+        background-color: #ecf0f1;
+      }
+
+      .btn-action {
+        background-color: #e67e22;
+        color: white;
+      }
+
+      .btn-action:hover {
+        background-color: #d35400;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🏨 Kosakata Perhotelan (Bab 1)</h1>
+    <div class="progress" id="progress">1 / 52</div>
+
+    <div class="card-container" onclick="flipCard()">
+      <div class="card" id="card">
+        <!-- Sisi Depan (Bahasa Jepang) -->
+        <div class="card-face card-front">
+          <div class="japanese-text" id="jp-text">-</div>
+          <div class="hint-front">💡 Klik untuk melihat arti</div>
+        </div>
+        <!-- Sisi Belakang (Bahasa Indonesia) -->
+        <div class="card-face card-back">
+          <div class="indonesian-text" id="id-text">-</div>
+          <div class="hint-back">💡 Klik untuk kembali</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn-nav" onclick="prevCard()">◀ Sebelum</button>
+      <button class="btn-action" onclick="shuffleCards()">🔀 Acak</button>
+      <button class="btn-nav" onclick="nextCard()">Sesudah ▶</button>
+    </div>
+
+    <script>
+      // Data lengkap 52 kosakata (Halaman 1 & 2)
+      const originalDataset = [
+        { jp: "起こる (おこる)", id: "Terjadi" },
+        { jp: "印象 (いんしょう)", id: "Kesan" },
+        { jp: "広告 (こうこく)", id: "Iklan" },
+        { jp: "以下 (いか)", id: "Di bawah ini" },
+        { jp: "理解 (りかい)", id: "Memahami" },
+        {
+          jp: "宿泊料金以外 (しゅくはくりょうきんいがい)",
+          id: "Selain biaya menginap",
+        },
+        { jp: "宿泊税 (しゅくはくぜい)", id: "Pajak menginap" },
+        { jp: "入湯税 (にゅうとうぜい)", id: "Pajak mandi" },
+        { jp: "発生します (はっせいします)", id: "Terjadi" },
+        { jp: "販売します (はんばいします)", id: "Menjual" },
+        { jp: "所在します (しょざいします)", id: "Berlokasi" },
+        { jp: "行事 (ぎょうじ)", id: "Acara" },
+        { jp: "上記 (じょうき)", id: "Di atas (yang sudah disebutkan)" },
+        { jp: "事前 (じぜん)", id: "Sebelumnya" },
+        {
+          jp: "宿泊予定日 (しゅくはくよていび)",
+          id: "Tanggal menginap yang direncanakan",
+        },
+        { jp: "定めます (さだめます)", id: "Menetapkan" },
+        { jp: "宿泊後 (しゅくはくご)", id: "Setelah menginap" },
+        { jp: "安心します (あんしんします)", id: "Merasa tenang" },
+        { jp: "与えます (あたえます)", id: "Memberikan" },
+        { jp: "清潔感 (せいけつかん)", id: "Rasa bersih" },
+        { jp: "姿勢 (しせい)", id: "Sikap" },
+        { jp: "有無 (うむ)", id: "Ada atau tidak ada" },
+        { jp: "用可能 (ようかのう)", id: "Dapat digunakan" },
+        { jp: "火災 (かさい)", id: "Kebakaran" },
+        { jp: "自然災害時 (しぜんさいがいじ)", id: "Saat bencana alam" },
+        { jp: "非常口 (ひじょうぐち)", id: "Pintu darurat" },
+        { jp: "範囲内 (はんいない)", id: "Dalam batas" },
+        { jp: "個々 (ここ)", id: "Masing-masing" },
+        { jp: "滞年中 (たいざいちゅう)", id: "Selama tinggal" },
+        { jp: "館外 (かんがい)", id: "Di luar gedung" },
+        { jp: "幅広い (はばひろい)", id: "Luas" },
+        { jp: "配置 (はいち)", id: "Penempatan" },
+        { jp: "部門 (ぶもん)", id: "Departemen" },
+        { jp: "作業 (さぎょう)", id: "Pekerjaan" },
+        { jp: "届けます (とどけます)", id: "Mengantarkan" },
+        { jp: "繰り返す (くりかえす)", id: "Mengulang" },
+        { jp: "事前 (じぜん)", id: "Sebelumnya" },
+        { jp: "お出迎え (おでむかえ)", id: "Sambutan" },
+        { jp: "お見送り (おみおくり)", id: "Perpisahan" },
+        { jp: "最初 (さいしょ)", id: "Awal" },
+        { jp: "お世話全般 (おせわぜんぱん)", id: "Semua bantuan/perawatan" },
+        { jp: "呼び鈴 (よびりん)", id: "Bel panggil" },
+        { jp: "鳴らし (ならし)", id: "Membunyikan" },
+        { jp: "むやみ (むやみ)", id: "Sembarangan" },
+        { jp: "終えます (おえます)", id: "Menyelesaikan" },
+        { jp: "影響 (えいきょう)", id: "Pengaruh" },
+        { jp: "含まれます (ふくまれます)", id: "Termasuk" },
+        { jp: "館内利用 (かんないりよう)", id: "Penggunaan dalam gedung" },
+        { jp: "記載 (きさい)", id: "Dicatat" },
+        { jp: "請求明細書 (せいきゅうめいさいしょ)", id: "Rincian tagihan" },
+        { jp: "請求金額 (せいきゅうきんがく)", id: "Jumlah tagihan" },
+        { jp: "請求する (せいきゅうする)", id: "Menagih" },
+      ];
+
+      let cards = [...originalDataset];
+      let currentIndex = 0;
+
+      const cardEl = document.getElementById("card");
+      const jpTextEl = document.getElementById("jp-text");
+      const idTextEl = document.getElementById("id-text");
+      const progressEl = document.getElementById("progress");
+
+      function flipCard() {
+        cardEl.classList.toggle("flipped");
+      }
+
+      function updateCard() {
+        cardEl.classList.remove("flipped");
+        setTimeout(() => {
+          jpTextEl.textContent = cards[currentIndex].jp;
+          idTextEl.textContent = cards[currentIndex].id;
+          progressEl.textContent = `${currentIndex + 1} / ${cards.length}`;
+        }, 150);
+      }
+
+      function nextCard() {
+        currentIndex = (currentIndex + 1) % cards.length;
+        updateCard();
+      }
+
+      function prevCard() {
+        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+        updateCard();
+      }
+
+      function shuffleCards() {
+        for (let i = cards.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [cards[i], cards[j]] = [cards[j], cards[i]];
+        }
+        currentIndex = 0;
+        updateCard();
+        alert("🔀 Kartu telah diacak!");
+      }
+
+      // Mulai aplikasi
+      updateCard();
+    </script>
+  </body>
+</html>
