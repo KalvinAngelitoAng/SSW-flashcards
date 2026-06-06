@@ -80,9 +80,10 @@
       }
 
       .japanese-text {
-        font-size: 28px;
+        font-size: 24px;
         font-weight: bold;
         color: #2c3e50;
+        word-break: break-word;
       }
 
       .hint-front {
@@ -104,8 +105,9 @@
       }
 
       .indonesian-text {
-        font-size: 24px;
+        font-size: 22px;
         font-weight: 500;
+        word-break: break-word;
       }
 
       /* Tombol Kontrol */
@@ -149,7 +151,7 @@
   </head>
   <body>
     <h1>🏨 Kosakata Perhotelan (Bab 1)</h1>
-    <div class="progress" id="progress">1 / 52</div>
+    <div class="progress" id="progress">- / -</div>
 
     <div class="card-container" onclick="flipCard()">
       <div class="card" id="card">
@@ -173,9 +175,9 @@
     </div>
 
     <script>
-      // Data lengkap 52 kosakata (Halaman 1 & 2)
+      // Data lengkap kosakata hasil penggabungan
       const updatedDataset = [
-  // --- KOSAKATA DARI DATASET AWAL ---
+        // --- KOSAKATA DARI DATASET AWAL ---
         { jp: "起こる (おこる)", id: "Terjadi" },
         { jp: "印象 (いんしょう)", id: "Kesan" },
         { jp: "広告 (こうこく)", id: "Iklan" },
@@ -227,13 +229,13 @@
         { jp: "請求明細書 (せいきゅうめいさいしょ)", id: "Rincian tagihan" },
         { jp: "請求金額 (せいきゅうきんがく)", id: "Jumlah tagihan" },
         { jp: "請求する (せいきゅうする)", id: "Menagih" },
-      
+        
         // --- TAMBAHAN KOSAKATA BARU DARI PART 2 ---
         { jp: "宿泊業 (しゅくはくぎょう)", id: "Industri perhotelan / penginapan" },
         { jp: "宿泊施設 (しゅくはくしせつ)", id: "Fasilitas penginapan / akomodasi" },
         { jp: "フロント (ふろんと)", id: "Front desk / meja resepsionis" },
         { jp: "レセプション (れせぷしょん)", id: "Resepsionis" },
-        { jp: "手手続き (てつづき)", id: "Prosedur administrasi / proses" },
+        { jp: "手続き (てつづき)", id: "Prosedur administrasi / proses" },
         { jp: "担当する (たんとうする)", id: "Bertanggung jawab / menangani" },
         { jp: "到着する (とうちゃくする)", id: "Kedatangan / tiba di hotel" },
         { jp: "出発する (しゅっぱつする)", id: "Keberangkatan / pergi meninggalkan hotel" },
@@ -242,7 +244,7 @@
         { jp: "「宿泊施設の顏」 (しゅくはくしせつのかお)", id: '"Wajah" penginapan (figuratif)' },
         { jp: "快 (かいてき)", id: "Nyaman" },
         { jp: "過ごす (すごす)", id: "Menghabiskan waktu" },
-        { jp: "欠かすことのできない (かかすことのできない)", id: "Sangat penting / esensial (tidak boleh absen)" },
+        { jp: "欠かすことodeきない (かかすことのできない)", id: "Sangat penting / esensial (tidak boleh absen)" },
         { jp: "主な業務 (おもなぎょうむ)", id: "Tugas-tugas utama" },
         { jp: "印象を決める (いんしょうをきめる)", id: "Menentukan kesan / citra" },
         { jp: "正しい礼儀作法 (ただしいれいぎさほう)", id: "Tata krama / etika sopan santun yang benar" },
@@ -294,9 +296,9 @@
         { jp: "したがって (したがって)", id: "Berdasarkan / mengikuti (kebijakan)" },
         { jp: "キャンセル料 (きゃんせるりょう)", id: "Biaya pembatalan" },
         { jp: "お支払いいただく (おしはらいいただく)", id: "Membayar (bentuk sopan formal)" },
-        { jp: "その他 (そのた)", id: "Lainnya / selain itu" },
+        { jp: "その他 (sonota)", id: "Lainnya / selain itu" },
         { jp: "忘れ物 (わすれもの)", id: "Barang tertinggal" },
-        { jp: "いずれの場合でも (いずれのばあいでも)", id: "Dalam situasi mana pun" },
+        { jp: "いずれの場合 death (いずれのばあい death)", id: "Dalam situasi mana pun" },
         { jp: "予約者名 (よやくしゃめい)", id: "Nama orang yang memesan (pemesan)" },
         { jp: "特定する (とくていする)", id: "Mengidentifikasi secara tepat" },
         { jp: "受付 (うけつけ)", id: "Pendaftaran / receptionist desk" },
@@ -333,9 +335,9 @@
         { jp: "異なります (ことなります)", id: "Berbeda / tidak sama" },
         { jp: "滞年中 (たいざいちゅう)", id: "Selama menginap / tinggal di hotel" },
         { jp: "近くのお店 (ちかくのおみせ)", id: "Toko / kedai di sekitar hotel" },
-        { jp: "館外のこと (かんがいのこと)", id: "Hal-hal di luar area hotel" },
+        { jp: "館外のこと (かんgai no koto)", id: "Hal-hal di luar area hotel" },
         { jp: "幅広い知識 (はばひろいちしき)", id: "Pengetahuan yang luas" },
-        { jp: "配置されている (はいちされている)", id: "Ditempatkan / diposisikan (staf)" },
+        { jp: "配置されている (はい치されている)", id: "Ditempatkan / diposisikan (staf)" },
         { jp: "フロント以外の部門 (ふろんといがいのぶもん)", id: "Divisi/departemen selain front desk" },
         { jp: "作業 (さぎょう)", id: "Pekerjaan / operasional tugas" },
         { jp: "電話対応 (でんわたいおう)", id: "Penanganan telepon" },
@@ -364,7 +366,7 @@
         { jp: "許可 (きょか)", id: "Izin / permisi" },
         { jp: "むやみに (むやみに)", id: "Sembarangan / tanpa alasan jelas" },
         { jp: "精算を行う (せいさんをおこなう)", id: "Melakukan pelunasan tagihan" },
-        { jp: "影響が出ないように (えいきょうがでないように)", id: "Agar tidak memengaruhi / mengganggu" },
+        { jp: "影響が出ないように (えいきょうがえないように)", id: "Agar tidak memengaruhi / mengganggu" },
         { jp: "スムーズに手続きを進める (すむーずにてつづきをすすめる)", id: "Memproses administrasi dengan lancar" },
         { jp: "お支払い (おしはらい)", id: "Pembayaran" },
         { jp: "ご宿泊以外 (ごしゅくはくいがい)", id: "Di luar dari tarif dasar kamar" },
@@ -386,7 +388,8 @@
         { jp: "別に請求する (べつにせいきゅうする)", id: "Menagih secara terpisah" }
       ];
 
-      let cards = [...originalDataset];
+      // PERBAIKAN: Menggunakan updatedDataset yang benar-benar didefinisikan di atas
+      let cards = [...updatedDataset];
       let currentIndex = 0;
 
       const cardEl = document.getElementById("card");
@@ -427,7 +430,7 @@
         alert("🔀 Kartu telah diacak!");
       }
 
-      // Mulai aplikasi
+      // Mulai aplikasi saat halaman pertama kali dimuat
       updateCard();
     </script>
   </body>
