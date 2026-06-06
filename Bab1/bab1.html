@@ -1,296 +1,434 @@
 <!doctype html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flashcard Kosakata Perhotelan Bab 1</title>
-    <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flashcard Kosakata Perhotelan Bab 1</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
 
-      body {
-        background-color: #f0f4f8;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        padding: 20px;
-      }
+      body {
+        background-color: #f0f4f8;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
 
-      h1 {
-        color: #2c3e50;
-        margin-bottom: 10px;
-        font-size: 24px;
-        text-align: center;
-      }
+      h1 {
+        color: #2c3e50;
+        margin-bottom: 10px;
+        font-size: 24px;
+        text-align: center;
+      }
 
-      .progress {
-        color: #7f8c8d;
-        margin-bottom: 20px;
-        font-weight: bold;
-      }
+      .progress {
+        color: #7f8c8d;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
 
-      /* Container Flashcard */
-      .card-container {
-        width: 350px;
-        height: 250px;
-        perspective: 1000px;
-        cursor: pointer;
-        margin-bottom: 30px;
-      }
+      /* Container Flashcard */
+      .card-container {
+        width: 350px;
+        height: 250px;
+        perspective: 1000px;
+        cursor: pointer;
+        margin-bottom: 30px;
+      }
 
-      .card {
-        width: 100%;
-        height: 100%;
-        position: relative;
-        transform-style: preserve-3d;
-        transition: transform 0.6s;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        border-radius: 15px;
-      }
+      .card {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.6s;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+      }
 
-      .card.flipped {
-        transform: rotateY(180deg);
-      }
+      .card.flipped {
+        transform: rotateY(180deg);
+      }
 
-      .card-face {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        backface-visibility: hidden;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        border-radius: 15px;
-        padding: 20px;
-        text-align: center;
-      }
+      .card-face {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+      }
 
-      /* Bagian Depan (Jepang) */
-      .card-front {
-        background-color: #ffffff;
-        color: #333;
-        border: 2px solid #3498db;
-      }
+      /* Bagian Depan (Jepang) */
+      .card-front {
+        background-color: #ffffff;
+        color: #333;
+        border: 2px solid #3498db;
+      }
 
-      .japanese-text {
-        font-size: 24px;
-        font-weight: bold;
-        color: #2c3e50;
-        word-break: break-word;
-      }
+      .japanese-text {
+        font-size: 28px;
+        font-weight: bold;
+        color: #2c3e50;
+      }
 
-      .hint-front {
-        font-size: 12px;
-        color: #95a5a6;
-        margin-top: 15px;
-      }
-      .hint-back {
-        font-size: 12px;
-        color: #ffffff;
-        margin-top: 15px;
-      }
+      .hint-front {
+        font-size: 12px;
+        color: #95a5a6;
+        margin-top: 15px;
+      }
+      .hint-back {
+        font-size: 12px;
+        color: #ffffff;
+        margin-top: 15px;
+      }
 
-      /* Bagian Belakang (Indonesia) */
-      .card-back {
-        background-color: #3498db;
-        color: white;
-        transform: rotateY(180deg);
-      }
+      /* Bagian Belakang (Indonesia) */
+      .card-back {
+        background-color: #3498db;
+        color: white;
+        transform: rotateY(180deg);
+      }
 
-      .indonesian-text {
-        font-size: 22px;
-        font-weight: 500;
-        word-break: break-word;
-      }
+      .indonesian-text {
+        font-size: 24px;
+        font-weight: 500;
+      }
 
-      /* Tombol Kontrol */
-      .controls {
-        display: flex;
-        gap: 15px;
-        width: 100%;
-        max-width: 350px;
-      }
+      /* Tombol Kontrol */
+      .controls {
+        display: flex;
+        gap: 15px;
+        width: 100%;
+        max-width: 350px;
+      }
 
-      button {
-        flex: 1;
-        padding: 12px;
-        border: none;
-        border-radius: 8px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background 0.2s;
-      }
+      button {
+        flex: 1;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
 
-      .btn-nav {
-        background-color: #ffffff;
-        color: #2c3e50;
-        border: 1px solid #bdc3c7;
-      }
+      .btn-nav {
+        background-color: #ffffff;
+        color: #2c3e50;
+        border: 1px solid #bdc3c7;
+      }
 
-      .btn-nav:hover {
-        background-color: #ecf0f1;
-      }
+      .btn-nav:hover {
+        background-color: #ecf0f1;
+      }
 
-      .btn-action {
-        background-color: #e67e22;
-        color: white;
-      }
+      .btn-action {
+        background-color: #e67e22;
+        color: white;
+      }
 
-      .btn-action:hover {
-        background-color: #d35400;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>🏨 Kosakata Perhotelan (Bab 1)</h1>
-    <div class="progress" id="progress">- / -</div>
+      .btn-action:hover {
+        background-color: #d35400;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🏨 Kosakata Perhotelan (Bab 1)</h1>
+    <div class="progress" id="progress">1 / 52</div>
 
-    <div class="card-container" onclick="flipCard()">
-      <div class="card" id="card">
-        <div class="card-face card-front">
-          <div class="japanese-text" id="jp-text">-</div>
-          <div class="hint-front">💡 Klik untuk melihat arti</div>
-        </div>
-        <div class="card-face card-back">
-          <div class="indonesian-text" id="id-text">-</div>
-          <div class="hint-back">💡 Klik untuk kembali</div>
-        </div>
-      </div>
-    </div>
+    <div class="card-container" onclick="flipCard()">
+      <div class="card" id="card">
+        <!-- Sisi Depan (Bahasa Jepang) -->
+        <div class="card-face card-front">
+          <div class="japanese-text" id="jp-text">-</div>
+          <div class="hint-front">💡 Klik untuk melihat arti</div>
+        </div>
+        <!-- Sisi Belakang (Bahasa Indonesia) -->
+        <div class="card-face card-back">
+          <div class="indonesian-text" id="id-text">-</div>
+          <div class="hint-back">💡 Klik untuk kembali</div>
+        </div>
+      </div>
+    </div>
 
-    <div class="controls">
-      <button class="btn-nav" onclick="prevCard()">◀ Sebelum</button>
-      <button class="btn-action" onclick="shuffleCards()">🔀 Acak</button>
-      <button class="btn-nav" onclick="nextCard()">Sesudah ▶</button>
-    </div>
+    <div class="controls">
+      <button class="btn-nav" onclick="prevCard()">◀ Sebelum</button>
+      <button class="btn-action" onclick="shuffleCards()">🔀 Acak</button>
+      <button class="btn-nav" onclick="nextCard()">Sesudah ▶</button>
+    </div>
 
-    <script>
-      // Data lengkap kosakata (Sudah disanitasi & diperbaiki dari typo)
-      const updatedDataset = [
-        // --- KOSAKATA DARI DATASET AWAL ---
-        { jp: "起こる (おこる)", id: "Terjadi" },
-        { jp: "印象 (いんしょう)", id: "Kesan" },
-        { jp: "広告 (こうこく)", id: "Iklan" },
-        { jp: "以下 (いか)", id: "Di bawah ini" },
-        { jp: "理解 (りかい)", id: "Memahami" },
-        { jp: "宿泊料金以外 (しゅくはくりょうきんいがい)", id: "Selain biaya menginap" },
-        { jp: "宿泊税 (しゅくはくぜい)", id: "Pajak menginap" },
-        { jp: "入湯税 (にゅうとうぜい)", id: "Pajak mandi" },
-        { jp: "発生します (はっせいします)", id: "Terjadi" },
-        { jp: "販売します (はんばいします)", id: "Menjual" },
-        { jp: "所在します (しょざいします)", id: "Berlokasi" },
-        { jp: "行事 (ぎょうじ)", id: "Acara" },
-        { jp: "上記 (じょうき)", id: "Di atas (yang sudah disebutkan)" },
-        { jp: "事前 (じぜん)", id: "Sebelumnya" },
-        { jp: "宿泊予定日 (しゅくはくよていび)", id: "Tanggal menginap yang direncanakan" },
-        { jp: "定めます (さだめます)", id: "Menetapkan" },
-        { jp: "宿泊後 (しゅくはくご)", id: "Setelah menginap" },
-        { jp: "安心します (あんしんします)", id: "Merasa tenang" },
-        { jp: "与えます (あたえます)", id: "Memberikan" },
-        { jp: "清潔感 (せいけつかん)", id: "Rasa bersih" },
-        { jp: "姿勢 (しせい)", id: "Sikap" },
-        { jp: "有無 (うむ)", id: "Ada atau tidak ada" },
-        { jp: "用可能 (ようかのう)", id: "Dapat digunakan" },
-        { jp: "火災 (かさい)", id: "Kebakaran" },
-        { jp: "自然災害時 (しぜんさいがいじ)", id: "Saat bencana alam" },
-        { jp: "非常口 (ひじょうぐち)", id: "Pintu darurat" },
-        { jp: "範囲内 (はんいない)", id: "Dalam batas" },
-        { jp: "個々 (ここ)", id: "Masing-masing" },
-        { jp: "滞年中 (たいざいちゅう)", id: "Selama tinggal" },
-        { jp: "館外 (かんがい)", id: "Di luar gedung" },
-        { jp: "幅広い (はばひろい)", id: "Luas" },
-        { jp: "配置 (はいち)", id: "Penempatan" },
-        { jp: "部門 (ぶもん)", id: "Departemen" },
-        { jp: "作業 (さぎょう)", id: "Pekerjaan" },
-        { jp: "届けます (とどけます)", id: "Mengantarkan" },
-        { jp: "繰り返す (くりかえす)", id: "Mengulang" },
-        { jp: "お出迎え (おでむかえ)", id: "Sambutan" },
-        { jp: "お見送り (おみおくり)", id: "Perpisahan" },
-        { jp: "最初 (さいしょ)", id: "Awal" },
-        { jp: "お世話全般 (おせわぜんぱん)", id: "Semua bantuan/perawatan" },
-        { jp: "呼び鈴 (よびりん)", id: "Bel panggil" },
-        { jp: "鳴らし (ならし)", id: "Membunyikan" },
-        { jp: "むやみ (むやみ)", id: "Sembarangan" },
-        { jp: "終えます (おえます)", id: "Menyelesaikan" },
-        { jp: "影響 (えいきょう)", id: "Pengaruh" },
-        { jp: "含まれます (ふくまれます)", id: "Termasuk" },
-        { jp: "館内利用 (かんないりよう)", id: "Penggunaan dalam gedung" },
-        { jp: "記載 (きさい)", id: "Dicatat" },
-        { jp: "請求明細書 (せいきゅうめいさいしょ)", id: "Rincian tagihan" },
-        { jp: "請求金額 (せいきゅうきんがく)", id: "Jumlah tagihan" },
-        { jp: "請求する (せいきゅうする)", id: "Menagih" },
-        
-        // --- TAMBAHAN KOSAKATA BARU DARI PART 2 ---
-        { jp: "宿泊業 (しゅくはくぎょう)", id: "Industri perhotelan / penginapan" },
-        { jp: "宿泊施設 (しゅくはくしせつ)", id: "Fasilitas penginapan / akomodasi" },
-        { jp: "フロント (ふろんと)", id: "Front desk / meja resepsionis" },
-        { jp: "レセプション (れせぷしょん)", id: "Resepsionis" },
-        { jp: "手続き (てつづき)", id: "Prosedur administrasi / proses" },
-        { jp: "担当する (たんとうする)", id: "Bertanggung jawab / menangani" },
-        { jp: "到着する (とうちゃくする)", id: "Kedatangan / tiba di hotel" },
-        { jp: "出発する (しゅっぱつする)", id: "Keberangkatan / pergi meninggalkan hotel" },
-        { jp: "~の間 (~のあいだ)", id: "Selama / di antara waktu" },
-        { jp: "対応する (たいおうする)", id: "Menangani / melayani / merespons" },
-        { jp: "「宿泊施設の顏」 (しゅくはくしせつのかお)", id: '"Wajah" penginapan (figuratif)' },
-        { jp: "快 (かいてき)", id: "Nyaman" },
-        { jp: "過ごす (すごす)", id: "Menghabiskan waktu" },
-        { jp: "欠かすことのできない (かかすことのできない)", id: "Sangat penting / esensial (tidak boleh absen)" },
-        { jp: "主な業務 (おもなぎょうむ)", id: "Tugas-tugas utama" },
-        { jp: "印象を決める (いんしょうをきめる)", id: "Menentukan kesan / citra" },
-        { jp: "正しい礼儀作法 (ただしいれいぎさほう)", id: "Tata krama / etika sopan santun yang benar" },
-        { jp: "言葉遣い (ことばづかい)", id: "Cara berbicara / penggunaan bahasa" },
-        { jp: "身に付ける (みにつける)", id: "Menguasai / mempelajari" },
-        { jp: "予約管理 (よやくかんり)", id: "Manajemen reservasi" },
-        { jp: "問い合わせ (といあわせ)", id: "Pertanyaan / kontak hubungi" },
-        { jp: "リクエスト (りくえすと)", id: "Permintaan / request" },
-        { jp: "キャンセル (きゃんせる)", id: "Pembatalan" },
-        { jp: "変更 (へんこう)", id: "Perubahan" },
-        { jp: "調整 (ちょうせい)", id: "Penyesuaian / adjustment" },
-        { jp: "予約情報 (よやくじょうほう)", id: "Informasi reservasi" },
-        { jp: "通じる (つうじる)", id: "Melalui / via" },
-        { jp: "宿泊希望日 (しゅくはくきぼうび)", id: "Tanggal menginap yang diinginkan" },
-        { jp: "空いている (あいている)", id: "Kosong / tersedia (kamar)" },
-        { jp: "満室 (まんしつ)", id: "Kamar penuh (tidak tersedia)" },
-        { jp: "空室 (くうしつ)", id: "Kamar kosong (tersedia)" },
-        { jp: "料金の詳細 (りょうきんのしょうさい)", id: "Rincian tarif / biaya" },
-        { jp: "宿泊料金 (しゅくはくりょうきん)", id: "Tarif menginap dasar" },
-        { jp: "宿泊税 (しゅくはくぜい)", id: "Pajak akomodasi" },
-        { jp: "入湯税 (にゅうとうぜい)", id: "Pajak pemandian air panas (onsen)" },
-        { jp: "サービス料 (さーびすりょう)", id: "Biaya layanan (service charge)" },
-        { jp: "発生する (はっせいする)", id: "Muncul / dikenakan (biaya tambahan)" },
-        { jp: "シングルルーム (しんぐるるーむ)", id: "Single Room (1 tempat tidur)" },
-        { jp: "ツインルーム (ついんるーむ)", id: "Twin Room (2 tempat tidur)" },
-        { jp: "プランの詳細 (ぷらんのしょうさい)", id: "Rincian paket penjualan yang ditawarkan" },
-        { jp: "景色 (けしき)", id: "Pemandangan" },
-        { jp: "所在する地域 (しょざいするちいき)", id: "Wilayah tempat hotel berada (lokal)" },
-        { jp: "文化 (ぶんか)", id: "Budaya" },
-        { jp: "個人情報 (こじんじょうほう)", id: "Informasi pribadi / data privasi" },
-        { jp: "適切に管理する (てきせつにかんりする)", id: "Mengelola secara tepat" },
-        { jp: "氏名 (しめい)", id: "Nama lengkap" },
-        { jp: "連絡先 (れんらくさき)", id: "Kontak hubungi (No. HP/Email)" },
-        { jp: "電話番号 (でんわばんごう)", id: "Nomor telepon" },
-        { jp: "メールアドレス (めーるあどれす)", id: "Alamat email" },
-        { jp: "宿泊人数 (しゅくはくにんずう)", id: "Jumlah tamu" },
-        { jp: "交通手段 (こうつうしゅだん)", id: "Sarana / moda transportasi" },
-        { jp: "到着予定時間 (とうちゃくよていじかん)", id: "Perkiraan jam kedatangan" },
-        { jp: "アレルギー (あれるぎー)", id: "Alergi" },
-        { jp: "宿泊予定日 (しゅくはくよていび)", id: "Tanggal rencana menginap" },
-        { jp: "ノーショー (のーしょー)", id: "No-show (tidak datang tanpa kabar)" },
-        { jp: "防止 (ぼうし)", id: "Pencegahan" },
-        { jp: "約束する (やくそくする)", id: "Berjanji / berkomitmen" },
-        { jp: "~とともに (~とともに)", id: "Di samping... / bersamaan dengan" },
-        { jp: "最高のおもてなし (さいこうのおもてなし)", id: "Keramahan pelayanan tulus terbaik" },
-        { jp: "提供する (ていきょうする)", id: "Menyediakan / memberikan" },
-        { jp: "準備 (じゅんび)", id: "Persiapan" },
-        { jp: "キャンセルポリシー (きゃんせるぽりしー)", id: "Kebijakan pembatalan" },
-        { jp: "したがって (したがって)", id: "Berdasarkan / mengikuti (kebijakan)" },
-        { jp: "キャンセル料 (きゃんせるりょう)", id: "Biaya pembatalan" },
-        { jp: "お支払いいただく (おしはらいいただく)", id: "Membayar (bentuk
+    <script>
+      // Data lengkap 52 kosakata (Halaman 1 & 2)
+      const originalDataset = [
+  // --- KOSAKATA DARI DATASET AWAL ---
+        { jp: "起こる (おこる)", id: "Terjadi" },
+        { jp: "印象 (いんしょう)", id: "Kesan" },
+        { jp: "広告 (こうこく)", id: "Iklan" },
+        { jp: "以下 (いか)", id: "Di bawah ini" },
+        { jp: "理解 (りかい)", id: "Memahami" },
+        { jp: "宿泊料金以外 (しゅくはくりょうきんいがい)", id: "Selain biaya menginap" },
+        { jp: "宿泊税 (しゅくはくぜい)", id: "Pajak menginap" },
+        { jp: "入湯税 (にゅうとうぜい)", id: "Pajak mandi" },
+        { jp: "発生します (はっせいします)", id: "Terjadi" },
+        { jp: "販売します (はんばいします)", id: "Menjual" },
+        { jp: "所在します (しょざいします)", id: "Berlokasi" },
+        { jp: "行事 (ぎょうじ)", id: "Acara" },
+        { jp: "上記 (じょうき)", id: "Di atas (yang sudah disebutkan)" },
+        { jp: "事前 (じぜん)", id: "Sebelumnya" },
+        { jp: "宿泊予定日 (しゅくはくよていび)", id: "Tanggal menginap yang direncanakan" },
+        { jp: "定めます (さだめます)", id: "Menetapkan" },
+        { jp: "宿泊後 (しゅくはくご)", id: "Setelah menginap" },
+        { jp: "安心します (あんしんします)", id: "Merasa tenang" },
+        { jp: "与えます (あたえます)", id: "Memberikan" },
+        { jp: "清潔感 (せいけつかん)", id: "Rasa bersih" },
+        { jp: "姿勢 (しせい)", id: "Sikap" },
+        { jp: "有無 (うむ)", id: "Ada atau tidak ada" },
+        { jp: "用可能 (ようかのう)", id: "Dapat digunakan" },
+        { jp: "火災 (かさい)", id: "Kebakaran" },
+        { jp: "自然災害時 (しぜんさいがいじ)", id: "Saat bencana alam" },
+        { jp: "非常口 (ひじょうぐち)", id: "Pintu darurat" },
+        { jp: "範囲内 (はんいない)", id: "Dalam batas" },
+        { jp: "個々 (ここ)", id: "Masing-masing" },
+        { jp: "滞年中 (たいざいちゅう)", id: "Selama tinggal" },
+        { jp: "館外 (かんがい)", id: "Di luar gedung" },
+        { jp: "幅広い (はばひろい)", id: "Luas" },
+        { jp: "配置 (はいち)", id: "Penempatan" },
+        { jp: "部門 (ぶもん)", id: "Departemen" },
+        { jp: "作業 (さぎょう)", id: "Pekerjaan" },
+        { jp: "届けます (とどけます)", id: "Mengantarkan" },
+        { jp: "繰り返す (くりかえす)", id: "Mengulang" },
+        { jp: "お出迎え (おでむかえ)", id: "Sambutan" },
+        { jp: "お見送り (おみおくり)", id: "Perpisahan" },
+        { jp: "最初 (さいしょ)", id: "Awal" },
+        { jp: "お世話全般 (おせわぜんぱん)", id: "Semua bantuan/perawatan" },
+        { jp: "呼び鈴 (よびりん)", id: "Bel panggil" },
+        { jp: "鳴らし (ならし)", id: "Membunyikan" },
+        { jp: "むやみ (むやみ)", id: "Sembarangan" },
+        { jp: "終えます (おえます)", id: "Menyelesaikan" },
+        { jp: "影響 (えいきょう)", id: "Pengaruh" },
+        { jp: "含まれます (ふくまれます)", id: "Termasuk" },
+        { jp: "館内利用 (かんないりよう)", id: "Penggunaan dalam gedung" },
+        { jp: "記載 (きさい)", id: "Dicatat" },
+        { jp: "請求明細書 (せいきゅうめいさいしょ)", id: "Rincian tagihan" },
+        { jp: "請求金額 (せいきゅうきんがく)", id: "Jumlah tagihan" },
+        { jp: "請求する (せいきゅうする)", id: "Menagih" },
+      
+        // --- TAMBAHAN KOSAKATA BARU DARI PART 2 ---
+        { jp: "宿泊業 (しゅくはくぎょう)", id: "Industri perhotelan / penginapan" },
+        { jp: "宿泊施設 (しゅくはくしせつ)", id: "Fasilitas penginapan / akomodasi" },
+        { jp: "フロント (ふろんと)", id: "Front desk / meja resepsionis" },
+        { jp: "レセプション (れせぷしょん)", id: "Resepsionis" },
+        { jp: "手手続き (てつづき)", id: "Prosedur administrasi / proses" },
+        { jp: "担当する (たんとうする)", id: "Bertanggung jawab / menangani" },
+        { jp: "到着する (とうちゃくする)", id: "Kedatangan / tiba di hotel" },
+        { jp: "出発する (しゅっぱつする)", id: "Keberangkatan / pergi meninggalkan hotel" },
+        { jp: "~の間 (~のあいだ)", id: "Selama / di antara waktu" },
+        { jp: "対応する (たいおうする)", id: "Menangani / melayani / merespons" },
+        { jp: "「宿泊施設の顏」 (しゅくはくしせつのかお)", id: '"Wajah" penginapan (figuratif)' },
+        { jp: "快 (かいてき)", id: "Nyaman" },
+        { jp: "過ごす (すごす)", id: "Menghabiskan waktu" },
+        { jp: "欠かすことのできない (かかすことのできない)", id: "Sangat penting / esensial (tidak boleh absen)" },
+        { jp: "主な業務 (おもなぎょうむ)", id: "Tugas-tugas utama" },
+        { jp: "印象を決める (いんしょうをきめる)", id: "Menentukan kesan / citra" },
+        { jp: "正しい礼儀作法 (ただしいれいぎさほう)", id: "Tata krama / etika sopan santun yang benar" },
+        { jp: "言葉遣い (ことばづかい)", id: "Cara berbicara / penggunaan bahasa" },
+        { jp: "身に付ける (みにつける)", id: "Menguasai / mempelajari" },
+        { jp: "予約管理 (よやくかんり)", id: "Manajemen reservasi" },
+        { jp: "問い合わせ (といあわせ)", id: "Pertanyaan / kontak hubungi" },
+        { jp: "リクエスト (りくえすと)", id: "Permintaan / request" },
+        { jp: "キャンセル (きゃんせる)", id: "Pembatalan" },
+        { jp: "変更 (へんこう)", id: "Perubahan" },
+        { jp: "調整 (ちょうせい)", id: "Penyesuaian / adjustment" },
+        { jp: "予約情報 (よやくじょうほう)", id: "Informasi reservasi" },
+        { jp: "通じる (つうじる)", id: "Melalui / via" },
+        { jp: "宿泊希望日 (しゅくはくきぼうび)", id: "Tanggal menginap yang diinginkan" },
+        { jp: "空いている (あいている)", id: "Kosong / tersedia (kamar)" },
+        { jp: "満室 (まんしつ)", id: "Kamar penuh (tidak tersedia)" },
+        { jp: "空室 (くうしつ)", id: "Kamar kosong (tersedia)" },
+        { jp: "料金の詳細 (りょうきんのしょうさい)", id: "Rincian tarif / biaya" },
+        { jp: "宿泊料金 (しゅくはくりょうきん)", id: "Tarif menginap dasar" },
+        { jp: "宿泊税 (しゅくはくぜい)", id: "Pajak akomodasi" },
+        { jp: "入湯税 (にゅうとうぜい)", id: "Pajak pemandian air panas (onsen)" },
+        { jp: "サービス料 (さーびすりょう)", id: "Biaya layanan (service charge)" },
+        { jp: "発生する (はっせいする)", id: "Muncul / dikenakan (biaya tambahan)" },
+        { jp: "シングルルーム (しんぐるるーむ)", id: "Single Room (1 tempat tidur)" },
+        { jp: "ツインルーム (ついんるーむ)", id: "Twin Room (2 tempat tidur)" },
+        { jp: "プランの詳細 (ぷらんのしょうさい)", id: "Rincian paket penjualan yang ditawarkan" },
+        { jp: "景色 (けしき)", id: "Pemandangan" },
+        { jp: "所在する地域 (しょざいするちいき)", id: "Wilayah tempat hotel berada (lokal)" },
+        { jp: "文化 (ぶんか)", id: "Budaya" },
+        { jp: "個人情報 (こじんじょうほう)", id: "Informasi pribadi / data privasi" },
+        { jp: "適切に管理する (てきせつにかんりする)", id: "Mengelola secara tepat" },
+        { jp: "氏名 (しめい)", id: "Nama lengkap" },
+        { jp: "連絡先 (れんらくさき)", id: "Kontak hubungi (No. HP/Email)" },
+        { jp: "電話番号 (でんわばんごう)", id: "Nomor telepon" },
+        { jp: "メールアドレス (めーるあどれす)", id: "Alamat email" },
+        { jp: "宿泊人数 (しゅくはくにんずう)", id: "Jumlah tamu" },
+        { jp: "交通手段 (こうつうしゅだん)", id: "Sarana / moda transportasi" },
+        { jp: "到着予定時間 (とうちゃくよていじかん)", id: "Perkiraan jam kedatangan" },
+        { jp: "アレルギー (あれるぎー)", id: "Alergi" },
+        { jp: "宿泊予定日 (しゅくはくよていび)", id: "Tanggal rencana menginap" },
+        { jp: "ノーショー (のーしょー)", id: "No-show (tidak datang tanpa kabar)" },
+        { jp: "防止 (ぼうし)", id: "Pencegahan" },
+        { jp: "約束する (やくそくする)", id: "Berjanji / berkomitmen" },
+        { jp: "~とともに (~とともに)", id: "Di samping... / bersamaan dengan" },
+        { jp: "最高のおもてなし (さいこうのおもてなし)", id: "Keramahan pelayanan tulus terbaik" },
+        { jp: "提供する (ていきょうする)", id: "Menyediakan / memberikan" },
+        { jp: "準備 (じゅんび)", id: "Persiapan" },
+        { jp: "キャンセルポリシー (きゃんせるぽりしー)", id: "Kebijakan pembatalan" },
+        { jp: "したがって (したがって)", id: "Berdasarkan / mengikuti (kebijakan)" },
+        { jp: "キャンセル料 (きゃんせるりょう)", id: "Biaya pembatalan" },
+        { jp: "お支払いいただく (おしはらいいただく)", id: "Membayar (bentuk sopan formal)" },
+        { jp: "その他 (そのた)", id: "Lainnya / selain itu" },
+        { jp: "忘れ物 (わすれもの)", id: "Barang tertinggal" },
+        { jp: "いずれの場合でも (いずれのばあいでも)", id: "Dalam situasi mana pun" },
+        { jp: "予約者名 (よやくしゃめい)", id: "Nama orang yang memesan (pemesan)" },
+        { jp: "特定する (とくていする)", id: "Mengidentifikasi secara tepat" },
+        { jp: "受付 (うけつけ)", id: "Pendaftaran / receptionist desk" },
+        { jp: "宿泊の手続き (しゅくはくてつづき)", id: "Prosedur administrasi menginap" },
+        { jp: "ルームキーのお渡し (るーむきーのおわたし)", id: "Penyerahan kunci kamar" },
+        { jp: "館内 (かんない)", id: "Di dalam area hotel / lobi" },
+        { jp: "設備 (せつび)", id: "Fasilitas / sarana" },
+        { jp: "安心して (あんしんして)", id: "Dengan tenang dan aman" },
+        { jp: "ご案内 (ごあんない)", id: "Panduan / mengarahkan tamu" },
+        { jp: "身だしなみ (みだしなみ)", id: "Penampilan diri / kerapian" },
+        { jp: "良いイメージ (よいいめーじ)", id: "Kesan / citra yang baik" },
+        { jp: "与える (あたえる)", id: "Memberikan" },
+        { jp: "清潔感 (せいけつかん)", id: "Kesan bersih, higienis, dan rapi" },
+        { jp: "正しい (ただし)", id: "Benar / tepat" },
+        { jp: "丁寧 (ていねい)", id: "Sopan, ramah, dan teliti" },
+        { jp: "予約の有無 (よやくのうむ)", id: "Ada atau tidaknya reservasi" },
+        { jp: "間違いなく (まちがいなく)", id: "Tanpa kesalahan / sudah pasti" },
+        { jp: "予約が取れている (よやくがとれている)", id: "Reservasi sudah tercatat / didapatkan" },
+        { jp: "予約内容 (よやくないよう)", id: "Rincian / isi reservasi" },
+        { jp: "日本人以外 (にほんじんいがい)", id: "Selain warga negara Jepang" },
+        { jp: "外国人 (がいこくじん)", id: "Warga negara asing" },
+        { jp: "パスポートのコピー (ぱすぽーとのこぴー)", id: "Fotokopi paspor" },
+        { jp: "保管する (ほかんする)", id: "Menyimpan (dokumen)" },
+        { jp: "日本の法律 (にほんのほうりつ)", id: "Hukum / undang-undang Jepang" },
+        { jp: "定められている (さだめられている)", id: "Diwajibkan / ditetapkan oleh aturan" },
+        { jp: "提示していただく (ていじしていただく)", id: "Meminta tamu menunjukkan (paspor)" },
+        { jp: "お泊りいただく (おとまりいただく)", id: "Menginap (bentuk sopan/hormat)" },
+        { jp: "迷わないように (まよわないように)", id: "Agar tidak tersesat / bingung arah" },
+        { jp: "行き方 (いきかた)", id: "Jalur / cara menuju ke suatu tempat" },
+        { jp: "利用できる場所 (りようできるばしょ)", id: "Area yang dapat digunakan tamu" },
+        { jp: "利用可能な時間 (りようかのうなじかん)", id: "Waktu / jam operasional yang diizinkan" },
+        { jp: "避難経路 (ひなんけいろ)", id: "Jalur evakuasi" },
+        { jp: "個々の (ここの)", id: "Masing-masing / setiap" },
+        { jp: "異なります (ことなります)", id: "Berbeda / tidak sama" },
+        { jp: "滞年中 (たいざいちゅう)", id: "Selama menginap / tinggal di hotel" },
+        { jp: "近くのお店 (ちかくのおみせ)", id: "Toko / kedai di sekitar hotel" },
+        { jp: "館外のこと (かんがいのこと)", id: "Hal-hal di luar area hotel" },
+        { jp: "幅広い知識 (はばひろいちしき)", id: "Pengetahuan yang luas" },
+        { jp: "配置されている (はいちされている)", id: "Ditempatkan / diposisikan (staf)" },
+        { jp: "フロント以外の部門 (ふろんといがいのぶもん)", id: "Divisi/departemen selain front desk" },
+        { jp: "作業 (さぎょう)", id: "Pekerjaan / operasional tugas" },
+        { jp: "電話対応 (でんわたいおう)", id: "Penanganan telepon" },
+        { jp: "聞き取りやすい (ききとりやすい)", id: "Mudah didengar / dipahami dengan jelas" },
+        { jp: "はっきりと (はっきりと)", id: "Secara jelas" },
+        { jp: "ゆっくり (ゆっくり)", id: "Perlahan / lambat" },
+        { jp: "受話器を置く (じゅわきをおく)", id: "Meletakkan gagang telepon (menutup)" },
+        { jp: "届ける (とどける)", id: "Mengantarkan / mengirimkan" },
+        { jp: "ルームサービス (るーむさーびす)", id: "Layanan kamar (room service)" },
+        { jp: "ご注文内容 (ごちゅうもんないよう)", id: "Isi pesanan tamu" },
+        { jp: "把握しておくべき (はあくしておくべき)", id: "Wajib dipahami / dikuasai" },
+        { jp: "ドアマン業務 (どあまんぎょうむ)", id: "Tugas doorman (penyambut pintu masuk)" },
+        { jp: "玄関などに立ち (げんかんなどにたち)", id: "Berdiri di pintu masuk/gerbang" },
+        { jp: "ハウスキーパー (はうすきーぱー)", id: "Housekeeper (petugas pembersih kamar)" },
+        { jp: "清掃する (せいそうする)", id: "Membersihkan" },
+        { jp: "アメニティ類 (あめているい)", id: "Kelengkapan / amenitas kamar" },
+        { jp: "仲居業務 (なかいぎょうむ)", id: "Tugas pelayan tradisional di Ryokan" },
+        { jp: "お世話全般 (おせわせんばん)", id: "Pelayanan menyeluruh untuk tamu" },
+        { jp: "レストラン業務 (れすとらんぎょーむ)", id: "Tugas pelayanan restoran hotel" },
+        { jp: "コンシェルジュ (こんしぇるじゅ)", id: "Concierge (pemberi informasi khusus)" },
+        { jp: "手配を専門にする (てはいをせんもんにする)", id: "Berspesialisasi melakukan pemesanan" },
+        { jp: "兼務している (けんむしている)", id: "Merangkap tugas / tugas ganda" },
+        { jp: "客室に入る (きゃくしつにはいる)", id: "Masuk ke kamar tamu" },
+        { jp: "ドアをノックする (どあをのっくする)", id: "Mengetuk pintu" },
+        { jp: "呼び鈴を鳴らす (よびりんをならす)", id: "Membunyikan bel pintu" },
+        { jp: "許可 (きょか)", id: "Izin / permisi" },
+        { jp: "むやみに (むやみに)", id: "Sembarangan / tanpa alasan jelas" },
+        { jp: "精算を行う (せいさんをおこなう)", id: "Melakukan pelunasan tagihan" },
+        { jp: "影響が出ないように (えいきょうがでないように)", id: "Agar tidak memengaruhi / mengganggu" },
+        { jp: "スムーズに手続きを進める (すむーずにてつづきをすすめる)", id: "Memproses administrasi dengan lancar" },
+        { jp: "お支払い (おしはらい)", id: "Pembayaran" },
+        { jp: "ご宿泊以外 (ごしゅくはくいがい)", id: "Di luar dari tarif dasar kamar" },
+        { jp: "飲料 (いんりょう)", id: "Minuman" },
+        { jp: "マッサージ (まっさーじ)", id: "Pijat / massage" },
+        { jp: "館内利用 (かんないりよう)", id: "Penggunaan fasilitas hotel oleh tamu" },
+        { jp: "会計 (かいけい)", id: "Kasir / proses pembayaran" },
+        { jp: "キャッシャー (きゃっしゃー)", id: "Kasir (cashier)" },
+        { jp: "請求する (せいきゅうする)", id: "Menagih pembayaran" },
+        { jp: "請求明細書 (せいきゅうめいさいしょ)", id: "Rincian tagihan (invoice details)" },
+        { jp: "発行する (はっこうする)", id: "Menerbitkan / mencetak (dokumen)" },
+        { jp: "領収書 (りょうしゅうしょ)", id: "Kwitansi / tanda terima pembayaran" },
+        { jp: "お支払いの方法 (おしはらいのほうほう)", id: "Metode pembayaran (cash/kartu)" },
+        { jp: "請求金額 (せいきゅうきんがく)", id: "Jumlah tagihan" },
+        { jp: "習慣 (しゅうかん)", id: "Kebiasaan / budaya" },
+        { jp: "チップ (ちっぷ)", id: "Tip (uang tambahan untuk staf)" },
+        { jp: "受け取る文化はありません (うけとるぶんかはありません)", id: "Tidak ada budaya menerima (tip)" },
+        { jp: "含んで請求する (ふくんでせいきゅうする)", id: "Menagih dengan memasukkan biaya" },
+        { jp: "別に請求する (べつにせいきゅうする)", id: "Menagih secara terpisah" }
+      ];
+
+      let cards = [...originalDataset];
+      let currentIndex = 0;
+
+      const cardEl = document.getElementById("card");
+      const jpTextEl = document.getElementById("jp-text");
+      const idTextEl = document.getElementById("id-text");
+      const progressEl = document.getElementById("progress");
+
+      function flipCard() {
+        cardEl.classList.toggle("flipped");
+      }
+
+      function updateCard() {
+        cardEl.classList.remove("flipped");
+        setTimeout(() => {
+          jpTextEl.textContent = cards[currentIndex].jp;
+          idTextEl.textContent = cards[currentIndex].id;
+          progressEl.textContent = `${currentIndex + 1} / ${cards.length}`;
+        }, 150);
+      }
+
+      function nextCard() {
+        currentIndex = (currentIndex + 1) % cards.length;
+        updateCard();
+      }
+
+      function prevCard() {
+        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+        updateCard();
+      }
+
+      function shuffleCards() {
+        for (let i = cards.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [cards[i], cards[j]] = [cards[j], cards[i]];
+        }
+        currentIndex = 0;
+        updateCard();
+        alert("🔀 Kartu telah diacak!");
+      }
+
+      // Mulai aplikasi
+      updateCard();
+    </script>
+  </body>
+</html>
